@@ -42,6 +42,7 @@ export default function App(props) {
           <VerticalSubtractionRace
             NumOfQuestions={numOfQuestions}
             onAnswers={handleAnswers}
+            maxTimePerQuestion={maxTime}
           />
         </Box>
       )}

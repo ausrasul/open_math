@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
 import Subtraction from "./subtraction";
+import Timer from "./Timer";
 
 const Row = styled("div")`
   display: flex;
@@ -145,11 +146,14 @@ export default function SubtractionGrid(props) {
 
     props.onAnswer({
       correct: minuendNum - subtrahendNum === answerNum,
-      time: new Date().getTime() - startTime
+      time: new Date().getTime() - startTime,
     });
   };
   return (
     <div className={props.className}>
+      <Box sx={{ mb: 4 }}>
+        <Timer time={props.maxTimePerQuestion} />
+      </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Empty />
@@ -193,7 +197,7 @@ export default function SubtractionGrid(props) {
               borderRadius: "5px",
               backgroundColor: "rgb(98, 98, 98)",
               height: "5px",
-              m: 1
+              m: 1,
             }}
           ></Row>
           <Row>

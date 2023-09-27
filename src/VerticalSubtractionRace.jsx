@@ -24,7 +24,12 @@ export default function VerticalSubtractionRace(props) {
   return (
     <>
       {!reset && (
-        <VerticalSubtraction key={1} digits={digits} onAnswer={handleAnswer} />
+        <VerticalSubtraction
+          maxTimePerQuestion={props.maxTimePerQuestion}
+          key={1}
+          digits={digits}
+          onAnswer={handleAnswer}
+        />
       )}
     </>
   );
