@@ -1,0 +1,41 @@
+{
+  "name": "testing-with-jest",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/main.jsx",
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "typescript": "latest",
+    "@vitejs/plugin-react": "latest",
+    "vite-plugin-eslint": "latest",
+    "eslint": "latest",
+    "eslint-config-react-app": "latest"
+  },
+  "scripts": {
+    "start": "vite",
+    "test": "vitest",
+    "build": "vite build"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "eslintConfig": {
+    "globals": {
+      "google": "readonly"
+    },
+    "extends": "react-app"
+  }
+}
