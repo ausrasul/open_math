@@ -19,25 +19,22 @@ export default function Timer({ time, sx}) {
   const maxSteps = 100;
   const [progress, setProgress] = useState(maxSteps); // Initial progress value (100%)
   const interval = 1000; //ms
-  const totalTime = time / interval; // Total time in seconds for the timer
   const step = time / 1000 / maxSteps;
 
   useEffect(() => {
     let timer = setInterval(() => {
-      // Calculate the progress value as a percentage
       const newProgress = Math.max(progress - step, 0);
       setProgress(newProgress);
 
       if (newProgress <= 0) {
         clearInterval(timer);
-        // Handle timer completion here
       }
     }, interval);
 
     return () => {
       clearInterval(timer);
     };
-  }, [progress]);
+  }, [progress, step]); // eslint-ignore-line
 
   return (
       <BorderLinearProgress sx={sx} variant="determinate" value={progress} />

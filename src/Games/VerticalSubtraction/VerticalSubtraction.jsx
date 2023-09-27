@@ -1,28 +1,16 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
-import Subtraction from "./subtraction";
-import Number from "./Number";
-import Timer from "./Timer";
-import Numpad from "./Numpad"
+import Subtraction from "../../Lib/numbers";
+import Number from "../../Lib/Number";
+import Timer from "../../Lib/Timer";
+import Numpad from "../../Lib/Numpad"
 
 const Row = styled("div")`
   display: flex;
 `;
-
-const AnswerField = styled(TextField)(
-  ({ theme }) => `
-  width: ${theme.spacing(6)};
-  height: ${theme.spacing(3)};
-  padding-bottom: ${theme.spacing(4)};
-  text-align: center;
-  margin: ${theme.spacing(0.5)};
-`
-);
-
 
 export default function SubtractionGrid(props) {
   const subtraction = new Subtraction();

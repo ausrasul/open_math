@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SubtractionGame  from "./SubtractionGame";
+import SubtractionGame  from "./Games/VerticalSubtraction/SubtractionGame";
 import { Box, Button, Typography } from "@mui/material";
 
 export default function App(props) {

@@ -1,9 +1,9 @@
-import Subtraction from "./subtraction";
+import Numbers from "./numbers";
 
 describe("MyCompnent", () => {
   var s;
   beforeEach(() => {
-    s = new Subtraction();
+    s = new Numbers();
   });
   afterEach(() => {});
 

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Button, Box, Rating } from "@mui/material";
 import VerticalSubtractionRace from "./VerticalSubtractionRace";
-import { calculate_points } from "./results";
-import Stats from "./Stats";
+import { calculate_points } from "../../Lib/results";
+import Stats from "../../Lib/Stats";
 
 export default function SubtractionGame(props) {
-  const [done, setDone] = useState(false);
   const [stats, setStats] = useState(null);
-  const [reset, setReset] = useState(false);
   const numOfQuestions = 5;
   const maxPoints = 10;
   const maxTime = 60000;
@@ -31,9 +29,7 @@ export default function SubtractionGame(props) {
       rating: (points / numOfQuestions) / maxPoints
     });
   };
-  /*const handleAnswers = (answers) => {
-    console.log(answers);
-  };*/
+
   return (
     <div>
       {!stats && (

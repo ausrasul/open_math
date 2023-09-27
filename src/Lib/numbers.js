@@ -1,4 +1,4 @@
-export default class Subtraction {
+export default class Numbers {
     generate_digit = () => Math.floor(Math.random() * 10);
     generate_number_array = (digits) => {
       digits = Math.max(digits, 1);
