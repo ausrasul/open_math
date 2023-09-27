@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(45deg, #fb7354, hsl(67, 98%, 75%));  /* Adjust the colors and angle (45deg) as needed */
+  background: linear-gradient(45deg, #fb7354, hsl(88, 98%, 75%));
   /* The first color (#FF5733) starts from the top-left corner, and the second color (#33FF57) starts from the bottom-right corner. */
   /* You can change the angle to control the direction of the gradient. */
   
@@ -7,4 +7,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+}
+
+.gradient {
+  background: linear-gradient(45deg, #fb7354, hsl(88, 98%, 75%));
 }

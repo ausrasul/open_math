@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
 import Subtraction from "./subtraction";
+import Number from "./Number";
 import Timer from "./Timer";
+import Numpad from "./Numpad"
 
 const Row = styled("div")`
   display: flex;
@@ -16,62 +17,12 @@ const AnswerField = styled(TextField)(
   ({ theme }) => `
   width: ${theme.spacing(6)};
   height: ${theme.spacing(3)};
+  padding-bottom: ${theme.spacing(4)};
   text-align: center;
   margin: ${theme.spacing(0.5)};
 `
 );
 
-const Empty = styled(Paper)(
-  ({ theme }) => `
-  visibility: hidden;
-  height: ${theme.spacing(3)};
-  width: ${theme.spacing(2)};
-  padding: ${theme.spacing(2)};
-  margin: ${theme.spacing(0.5)};
-`
-);
-
-const NumberContainer = styled(Paper)(
-  ({ theme }) => `
-  width: ${theme.spacing(2)};
-  height: ${theme.spacing(3)};
-  text-align: center;
-  padding: ${theme.spacing(2)};
-  margin: ${theme.spacing(0.5)};
-`
-);
-
-const Number = styled("div")`
-  font-weight: bold;
-  font-family: Courier New;
-  font-size: xx-large;
-  color: rgb(98, 98, 98);
-`;
-
-const TinyNumber = styled("div")`
-  font-weight: bold;
-  font-family: Courier New;
-  font-size: large;
-  color: rgb(98, 98, 98);
-`;
-
-const CrossedOff = styled("div")`
-  position: relative;
-  width: 200%;
-  height: 2px;
-  background-color: red;
-  transform-origin: -40% 0;
-  transform: rotate(-45deg);
-`;
-
-const CrossedOffBorrow = styled("div")`
-  position: relative;
-  width: 200%;
-  height: 2px;
-  background-color: red;
-  transform-origin: 0 0;
-  transform: rotate(-45deg);
-`;
 
 export default function SubtractionGrid(props) {
   const subtraction = new Subtraction();
@@ -81,6 +32,7 @@ export default function SubtractionGrid(props) {
   const [startTime] = useState(new Date().getTime());
   const [minuend] = useState(minuend_);
   const [subtrahend] = useState(subtrahend_);
+  const [openNumpadFor, setOpenNumpadFor] = useState(null)
 
   const [crossedOff, setCrossedOff] = useState(
     Array.from({ length: props.digits - 1 }, () => false)
@@ -97,6 +49,7 @@ export default function SubtractionGrid(props) {
   );
 
   const crossOff = (minuendIdx) => {
+    console.log(minuendIdx)
     const m = minuend.slice();
     const b = borrows.slice();
     const c = crossedOff.slice();
@@ -130,13 +83,11 @@ export default function SubtractionGrid(props) {
     setBorrowCrossOff(bc);
   };
 
-  const onAnswer = (idx) => (e) => {
-    let value = parseInt(e.target.value, 10);
-    if (isNaN(value)) value = "";
-    if (value < 0 || value > 9) return;
+  const onAnswer = (idx) => (num) => {
     const a = answer.slice();
-    a[idx] = value;
+    a[idx] = num;
     setAnswer(a);
+    setOpenNumpadFor(null)
   };
 
   const checkAnswer = () => {
@@ -150,77 +101,82 @@ export default function SubtractionGrid(props) {
     });
   };
   return (
-    <div className={props.className}>
-      <Box sx={{ mb: 4 }}>
-        <Timer time={props.maxTimePerQuestion} />
+    <Box className="asdf" sx={{ display: "flex", justifyContent: "center" }}>
+      <Box>
+        <Box sx={{ height: 12, mb: 2 }}></Box>
+        <Row>
+          <Number empty />
+        </Row>
+        <Row>
+        <Number empty />
+        </Row>
+        <Number
+          sx={{ boxShadow: "unset", backgroundColor: "unset" }}
+          value="-"
+          />
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Empty />
-          <Empty />
-          <NumberContainer
-            sx={{ boxShadow: "unset", backgroundColor: "unset" }}
+      <Box>
+        <Timer sx={{ height: 12, mb: 2 }} time={props.maxTimePerQuestion} />
+        <Row>
+        <Number empty />
+          {borrows.map((borrow, i) => (
+            <Number
+              key={"borrows" + i}
+              tiny
+              onClick={() => crossOffBorrow(i)}
+              value={borrow > 0 ? borrow : ""}
+              crossedOff={borrowCrossOff[i]}
+            />
+          ))}
+        </Row>
+        <Row>
+          {minuend.map((m, i) => (
+            <Number
+              key={"m" + i}
+              onClick={() => crossOff(i)}
+              value={m}
+              crossedOff={crossedOff[i]}
+            />
+          ))}
+        </Row>
+        <Row>
+          {subtrahend.map((s, i) => (
+            <Number
+            key={"s" + i}
+            value={s}
+            />
+          ))}
+        </Row>
+        <Row
+          sx={{
+            borderRadius: "5px",
+            backgroundColor: "rgb(98, 98, 98)",
+            height: "5px",
+            m: 1,
+          }}
+        ></Row>
+        <Row>
+          {answer.map((a, i) => (
+            <>
+            <Number
+              key={"answer" + i}
+              value={a}
+              onClick={()=> setOpenNumpadFor(i)}
+            />
+            <Numpad open={openNumpadFor === i} onClose={onAnswer(i)} />
+            </>
+          ))}
+        </Row>
+        <Row>
+          <Button
+            sx={{ width: "100%", mt: 4, mb: 1 }}
+            variant="contained"
+            onClick={checkAnswer}
           >
-            <Number>-</Number>
-          </NumberContainer>
-          <Empty />
-        </Box>
-        <Box>
-          <Row>
-            <Empty />
-            {borrows.map((borrow, i) => (
-              <NumberContainer key={"borrows" + i}>
-                <TinyNumber onClick={() => crossOffBorrow(i)}>
-                  {borrow > 0 ? borrow : ""}
-                  {borrowCrossOff[i] && <CrossedOffBorrow />}
-                </TinyNumber>
-              </NumberContainer>
-            ))}
-          </Row>
-          <Row>
-            {minuend.map((m, i) => (
-              <NumberContainer key={"m" + i}>
-                <Number onClick={() => crossOff(i)}>{m}</Number>
-                {crossedOff[i] && <CrossedOff />}
-              </NumberContainer>
-            ))}
-          </Row>
-          <Row>
-            {subtrahend.map((s, i) => (
-              <NumberContainer key={"s" + i}>
-                <Number>{s}</Number>
-              </NumberContainer>
-            ))}
-          </Row>
-          <Row
-            sx={{
-              borderRadius: "5px",
-              backgroundColor: "rgb(98, 98, 98)",
-              height: "5px",
-              m: 1,
-            }}
-          ></Row>
-          <Row>
-            {answer.map((a, i) => (
-              <AnswerField
-                key={"answer" + i}
-                variant="outlined"
-                value={a}
-                onChange={onAnswer(i)}
-              />
-            ))}
-          </Row>
-        </Box>
+            Klar
+          </Button>
+        </Row>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          sx={{ width: "50%", m: 5 }}
-          variant="contained"
-          onClick={checkAnswer}
-        >
-          Klar
-        </Button>
-      </Box>
-    </div>
+    </Box>
   );
 }

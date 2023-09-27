@@ -14,18 +14,16 @@ export default function Stats(props) {
   return (
     <div>
       <Row>
-        <Typography variant="h1">Klar!</Typography>
+        <Typography variant="h1">Klart!</Typography>
       </Row>
       <Row>
-        <Typography variant="h4">Din poäng är: {props.stats.points}</Typography>
+        <Typography variant="h4">Ditt resultat: {props.stats.points}</Typography>
       </Row>
       <Row>
-        <Typography variant="h4">Snitt tid per övning: {formatAvgTime(props.stats.avgTime)} sekonder</Typography>
+        <Typography variant="h4">Sekonder per övning: {formatAvgTime(props.stats.avgTime)}</Typography>
       </Row>
       <Row>
-        <Typography variant="h4">
-          {props.stats.correctAnswers} av {props.stats.numOfQuestions} är
-          korrekta!
+        <Typography variant="h4">Korrekt svar: {props.stats.correctAnswers} av {props.stats.numOfQuestions}
         </Typography>
       </Row>
     </div>

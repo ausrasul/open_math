@@ -15,7 +15,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-export default function Timer({ time }) {
+export default function Timer({ time, sx}) {
   const maxSteps = 100;
   const [progress, setProgress] = useState(maxSteps); // Initial progress value (100%)
   const interval = 1000; //ms
@@ -40,8 +40,6 @@ export default function Timer({ time }) {
   }, [progress]);
 
   return (
-    <div>
-      <BorderLinearProgress variant="determinate" value={progress} />
-    </div>
+      <BorderLinearProgress sx={sx} variant="determinate" value={progress} />
   );
 }

@@ -1,70 +1,24 @@
 import React, { useState } from "react";
-import { Button, Box, Rating } from "@mui/material";
-import "./main.css";
-import VerticalSubtractionRace from "./VerticalSubtractionRace";
-import { calculate_points } from "./results";
-import Stats from "./Stats";
+import SubtractionGame  from "./SubtractionGame";
+import { Box, Button, Typography } from "@mui/material";
 
 export default function App(props) {
-  const [done, setDone] = useState(false);
-  const [stats, setStats] = useState(null);
-  const [reset, setReset] = useState(false);
-  const numOfQuestions = 5;
-  const maxPoints = 10;
-  const maxTime = 60000;
-  const handleAnswers = (answers) => {
-    let correctAnswers = 0;
-    let points = 0;
-    let totalTime = 0;
-    answers.forEach(({ correct, time }) => {
-      if (correct) {
-        correctAnswers += 1;
-        points += calculate_points(time, maxTime, maxPoints);
-      }
-      totalTime += time;
-    });
-    const avgTime = Math.floor(totalTime / numOfQuestions);
-    setStats({
-      avgTime,
-      points,
-      correctAnswers,
-      numOfQuestions,
-      rating: (points / numOfQuestions) / maxPoints
-    });
-  };
-  /*const handleAnswers = (answers) => {
-    console.log(answers);
-  };*/
+  const [game, setGame] = useState(null)
   return (
-    <div>
-      {!stats && (
-        <Box sx={{ pt: 15, display: "flex", justifyContent: "center" }}>
-          <VerticalSubtractionRace
-            NumOfQuestions={numOfQuestions}
-            onAnswers={handleAnswers}
-            maxTimePerQuestion={maxTime}
-          />
+    <Box sx={{m: 4}}>
+      {!game && (
+        <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
+        <Button
+        sx={{p: 5, mt: 10}}
+        variant="contained"
+        onClick={()=>setGame("subtractionSpeedTest")}>
+          <Typography variant="h5">Spela Subtraction Speed Test</Typography>
+        </Button>
         </Box>
       )}
-      {stats && (
-        <Box
-          sx={{
-            display: "flex",
-            pt: 20,
-            flexDirection: "column",
-          }}
-        >
-          <Stats stats={stats} />
-          <Box sx={{ m: 5, display: "flex", justifyContent: "center" }}>
-            <Rating value={stats.rating * 5} max={5} precision={0.25} readOnly size="large" />
-          </Box>
-          <Box sx={{ m: 5, display: "flex", justifyContent: "center" }}>
-            <Button variant="contained" onClick={() => setStats(null)}>
-              Försök igen
-            </Button>
-          </Box>
-        </Box>
+      {game === "subtractionSpeedTest" && (
+        <SubtractionGame/>
       )}
-    </div>
+    </Box>
   );
 }
