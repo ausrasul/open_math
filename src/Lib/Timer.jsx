@@ -19,7 +19,7 @@ export default function Timer({ time, sx}) {
   const maxSteps = 100;
   const [progress, setProgress] = useState(maxSteps); // Initial progress value (100%)
   const interval = 1000; //ms
-  const step = time / 1000 / maxSteps;
+  const step = maxSteps / (time / 1000);
 
   useEffect(() => {
     let timer = setInterval(() => {

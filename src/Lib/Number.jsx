@@ -66,14 +66,15 @@ const CrossedOffTiny = styled("div")`
 `;
 
 export default function Number(props) {
-  if (props.tiny) return <TinyNumber {...props} />;
-  if (props.empty) return <Empty {...props}/>
-  return <NormalNumber {...props} />;
+  const { empty, tiny, ...restProps } = props;
+  if (tiny) return <TinyNumber {...restProps} />;
+  if (empty) return <Empty {...restProps}/>
+  return <NormalNumber {...restProps} />;
 }
 
 function TinyNumber(props) {
   return (
-    <NumberContainer sx={props.sx} onClick={props.onClick}>
+    <NumberContainer className={props.className} sx={props.sx} onClick={props.onClick}>
       <StyledTinyNumber>
         {props.value}
         {props.crossedOff && <CrossedOffTiny />}
@@ -84,7 +85,7 @@ function TinyNumber(props) {
 
 function NormalNumber(props) {
   return (
-    <NumberContainer sx={props.sx} onClick={props.onClick}>
+    <NumberContainer className={props.className} sx={props.sx} onClick={props.onClick}>
       <StyledNumber>{props.value}</StyledNumber>
       {props.crossedOff && <CrossedOff />}
     </NumberContainer>
