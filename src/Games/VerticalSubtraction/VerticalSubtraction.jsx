@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Subtraction from "../../Lib/numbers";
 import Number from "../../Lib/Number";
 import Timer from "../../Lib/Timer";
-import Numpad from "../../Lib/Numpad"
+import Numpad from "../../Lib/NumpadDialogSingle"
 
 const Row = styled("div")`
   display: flex;
@@ -151,7 +151,7 @@ export default function SubtractionGrid(props) {
               value={a}
               onClick={()=> setOpenNumpadFor(i)}
             />
-            <Numpad open={openNumpadFor === i} onClose={onAnswer(i)} />
+            <Numpad key={"numpad" + i} open={openNumpadFor === i} onClose={onAnswer(i)} />
             </>
           ))}
         </Row>
