@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import VerticalSubtraction from "./VerticalSubtraction";
-
+import QuestionResult from "../../Lib/QuestionResult"
 const getRandomDigits = () => 5;
 //  Math.min(Math.max(Math.floor(Math.random() * 10), 1), 6);
 
 export default function VerticalSubtractionRace(props) {
-  const [reset, setReset] = useState(false);
+  const [showResult, setShowResult] = useState(false);
   const [digits, setDigits] = useState(getRandomDigits());
   const [answers, setAnswers] = useState([]);
 
   const handleAnswer = (answer) => {
-    setReset(true);
-    setTimeout(() => setReset(false));
     setDigits(getRandomDigits());
     const answers_ = answers.slice();
     answers_.push(answer);
@@ -19,11 +17,11 @@ export default function VerticalSubtractionRace(props) {
       props.onAnswers(answers_);
     }
     setAnswers(answers_);
-    // show points and if correct
+    setShowResult(true);
   };
   return (
     <>
-      {!reset && (
+      {!showResult && (
         <VerticalSubtraction
           maxTimePerQuestion={props.maxTimePerQuestion}
           key={1}
@@ -31,6 +29,14 @@ export default function VerticalSubtractionRace(props) {
           onAnswer={handleAnswer}
         />
       )}
+      <QuestionResult
+        open={showResult}
+        correct={answers[answers.length - 1]?.correct}
+        time={answers[answers.length - 1]?.time}
+        maxTime={props.maxTimePerQuestion}
+        maxPoints={props.maxPointsPerQuestion}
+        onClose={() => setShowResult(false)}
+      />
     </>
   );
 }

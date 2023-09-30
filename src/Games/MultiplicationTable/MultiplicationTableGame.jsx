@@ -38,6 +38,7 @@ export default function SubtractionGame(props) {
             NumOfQuestions={numOfQuestions}
             onAnswers={handleAnswers}
             maxTimePerQuestion={maxTime}
+            maxPointsPerQuestion={maxPoints}
           />
         </Box>
       )}

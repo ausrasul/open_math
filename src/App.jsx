@@ -8,23 +8,37 @@ export default function App(props) {
   return (
     <Box sx={{ m: 4 }}>
       {!game && (
-        <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            pt: 5,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="h5">Åk 4-5</Typography>
           <Stack>
             <Button
               sx={{ p: 5, mt: 10 }}
               variant="contained"
               onClick={() => setGame("subtractionSpeedTest")}
             >
-              <Typography variant="h5">Subtraction Speed Test</Typography>
+              <div>
+                <Typography variant="h5">Subtraction</Typography>
+                <Typography variant="caption">Uppställning</Typography>
+              </div>
             </Button>
             <Button
               sx={{ p: 5, mt: 2 }}
               variant="contained"
               onClick={() => setGame("multiplicationTableSpeedTest")}
             >
-              <Typography variant="h5">
-                Multiplikationstabellen Speed Test
-              </Typography>
+              <div>
+                <Typography variant="h5">Multiplikation</Typography>
+                <Typography variant="caption">
+                  Multiplikationstabellen
+                </Typography>
+              </div>
             </Button>
           </Stack>
         </Box>
