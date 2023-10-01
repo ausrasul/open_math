@@ -3,6 +3,7 @@ import { Button, Box, Rating } from "@mui/material";
 import MultiplicationTableRace from "./MultiplicationTableRace";
 import { calculate_points } from "../../Lib/results";
 import Stats from "../../Lib/Stats";
+import storage from "../../Lib/storage"
 
 export default function SubtractionGame(props) {
   const [stats, setStats] = useState(null);
@@ -21,13 +22,16 @@ export default function SubtractionGame(props) {
       totalTime += time;
     });
     const avgTime = Math.floor(totalTime / numOfQuestions);
-    setStats({
+    const stats = {
       avgTime,
       points,
       correctAnswers,
       numOfQuestions,
-      rating: (points / numOfQuestions) / maxPoints
-    });
+      rating: (points / numOfQuestions) / maxPoints,
+      ts: new Date().getTime()
+    }
+    storage.save("multiplicationTable", stats)
+    setStats(stats);
   };
 
   return (
