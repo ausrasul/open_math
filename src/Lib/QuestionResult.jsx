@@ -36,7 +36,7 @@ export default function NumpadDialogSingle(props) {
           <Container>
             <CorrectIcon sx={{ fontSize: "50px", color: "green", mb: 2 }} />
             <Typography variant="h5">
-              Bonus:{" "}
+              Poäng:{" "}
               {calculate_points(props.time, props.maxTime, props.maxPoints)}
             </Typography>
           </Container>
@@ -44,7 +44,7 @@ export default function NumpadDialogSingle(props) {
         {!props.correct && (
           <Container>
             <WrongIcon sx={{ fontSize: "50px", color: "red", mb: 2 }} />
-            <Typography variant="h5">Bonus: 0</Typography>
+            <Typography variant="h5">Poäng: 0</Typography>
           </Container>
         )}
       </DialogContent>

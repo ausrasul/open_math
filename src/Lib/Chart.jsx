@@ -16,23 +16,22 @@ export default function LineChart({ data, title, id }) {
           },
         },
         scales: {
-            y1: {
-              type: "linear",
-              display: true,
-              position: "left",
+          points: {
+            type: "linear",
+            display: true,
+            position: "left",
+          },
+          speed: {
+            type: "linear",
+            display: true,
+            position: "right",
+            reverse: true,
+            // grid line settings
+            grid: {
+              drawOnChartArea: false, // only want the grid lines for one axis to show up
             },
-            y: {
-              type: "linear",
-              display: true,
-              position: "right",
-    
-              // grid line settings
-              grid: {
-                drawOnChartArea: false, // only want the grid lines for one axis to show up
-              },
-            },
+          },
         },
-    
       },
       type: "line",
       data: {
@@ -43,14 +42,14 @@ export default function LineChart({ data, title, id }) {
             data: data.map((item) => item.avgTime / 1000),
             cubicInterpolationMode: "monotone",
             tension: 0.4,
-            yAxisID: "y",
+            yAxisID: "speed",
           },
           {
             label: "Poäng",
             data: data.map((item) => item.points),
             cubicInterpolationMode: "monotone",
             tension: 0.4,
-            yAxisID: "y1",
+            yAxisID: "points",
           },
         ],
       },

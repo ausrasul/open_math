@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Typography, Box} from "@mui/material";
 import VerticalSubtraction from "./VerticalSubtraction";
-import QuestionResult from "../../Lib/QuestionResult"
+import QuestionResult from "../../Lib/QuestionResult";
 const getRandomDigits = () => 5;
 //  Math.min(Math.max(Math.floor(Math.random() * 10), 1), 6);
 
@@ -20,7 +21,10 @@ export default function VerticalSubtractionRace(props) {
     setShowResult(true);
   };
   return (
-    <>
+    <Box>
+      <Typography sx={{ textAlign: "center", fontSize: "x-large", mb: 1 }}>
+        {answers.length + 1} av {props.NumOfQuestions}
+      </Typography>
       {!showResult && (
         <VerticalSubtraction
           maxTimePerQuestion={props.maxTimePerQuestion}
@@ -37,6 +41,6 @@ export default function VerticalSubtractionRace(props) {
         maxPoints={props.maxPointsPerQuestion}
         onClose={() => setShowResult(false)}
       />
-    </>
+    </Box>
   );
 }
