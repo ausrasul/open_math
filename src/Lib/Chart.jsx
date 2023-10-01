@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 
-export default function LineChart(props){
+export default function LineChart({data, title, id}){
   const [chart, setChart] = useState(null);
 
-  const data = props.data
-  const title = props.title
-
   useEffect(() => {
-    const ctx = document.getElementById("myChart").getContext("2d");
+    const ctx = document.getElementById("chart" + id).getContext("2d");
 
     const chart = new Chart(ctx, {
+        options: {
+            plugins: {
+              title: {
+                display: true,
+                text: title,
+              }
+            }
+          },
       type: "line",
       data: {
-        labels: data.map(_ => ""),
+        labels: data.map(_item => ""),
         datasets: [
           {
             label: "Sekonder per fråga",
@@ -36,9 +41,9 @@ export default function LineChart(props){
     return () => {
       chart.destroy();
     };
-  }, data);
+  }, [data]);
 
   return (
-    <canvas id="myChart"></canvas>
+    <canvas id={"chart"+id} ></canvas>
   );
 };

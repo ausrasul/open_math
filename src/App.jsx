@@ -9,7 +9,7 @@ import Progress from "./Progress"
 export default function App(props) {
   const [game, setGame] = useState(null);
   return (
-    <Box sx={{ m: 4 }}>
+    <Box>
       {!game && (
         <Box
           sx={{
