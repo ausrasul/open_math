@@ -9,6 +9,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "latest",
+    "chart.js": "^4.4.0",
     "react": "latest",
     "react-dom": "latest"
   },

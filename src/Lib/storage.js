@@ -1,5 +1,7 @@
 const getAllStats = () => {
-    return JSON.parse(localStorage.getItem("anneMatte"))
+    let stats = JSON.parse(localStorage.getItem("anneMatte"))
+    if (!stats) return {}
+    return stats
 }
 const saveAllStats = (stats) => {
     localStorage.setItem("anneMatte", JSON.stringify(stats))
@@ -13,7 +15,6 @@ const getStats = (gameName) => {
 
 const setStats = (gameName, gameStats) => {
     let stats = getAllStats()
-    if (!stats) stats = {}
     if (stats[gameName] === undefined) stats[gameName] = []
     stats[gameName].push(gameStats)
     saveAllStats(stats)
@@ -21,5 +22,6 @@ const setStats = (gameName, gameStats) => {
 
 export default {
     save: setStats,
-    get: getStats
+    get: getStats,
+    getAll: getAllStats
 }

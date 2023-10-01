@@ -30,7 +30,7 @@ export default function SubtractionGame(props) {
       rating: (points / numOfQuestions) / maxPoints,
       ts: new Date().getTime()
     }
-    storage.save("subtraction", stats)
+    storage.save("Subtraction", stats)
     setStats(stats);
   };
 

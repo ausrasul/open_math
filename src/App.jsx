@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Stack, Box, Button, Typography } from "@mui/material";
+
 import SubtractionGame from "./Games/VerticalSubtraction/SubtractionGame";
 import MultiplicationTableGame from "./Games/MultiplicationTable/MultiplicationTableGame";
-import { Stack, Box, Button, Typography } from "@mui/material";
+import Progress from "./Progress"
+
 
 export default function App(props) {
   const [game, setGame] = useState(null);
@@ -40,11 +43,24 @@ export default function App(props) {
                 </Typography>
               </div>
             </Button>
+            <Button
+              sx={{ p: 5, mt: 2 }}
+              variant="contained"
+              onClick={() => setGame("stats")}
+            >
+              <div>
+                <Typography variant="h5">Min utveckling</Typography>
+                <Typography variant="caption">
+                  Visa min utveckling
+                </Typography>
+              </div>
+            </Button>
           </Stack>
         </Box>
       )}
       {game === "subtractionSpeedTest" && <SubtractionGame />}
       {game === "multiplicationTableSpeedTest" && <MultiplicationTableGame />}
+      {game === "stats" && <Progress />}
     </Box>
   );
 }
