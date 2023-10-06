@@ -1,3 +1,5 @@
+import api from "../Lib/api"
+
 const getAllStats = () => {
     let stats = JSON.parse(localStorage.getItem("anneMatte"))
     if (!stats) return {}
@@ -5,6 +7,7 @@ const getAllStats = () => {
 }
 const saveAllStats = (stats) => {
     localStorage.setItem("anneMatte", JSON.stringify(stats))
+    api.saveStats(stats)
 }
 
 const getStats = (gameName) => {
@@ -19,9 +22,9 @@ const setStats = (gameName, gameStats) => {
     stats[gameName].push(gameStats)
     saveAllStats(stats)
 }
-
-export default {
+const storage = {
     save: setStats,
     get: getStats,
     getAll: getAllStats
 }
+export default storage

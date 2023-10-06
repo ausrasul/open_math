@@ -21,9 +21,8 @@ export default function NumpadDialogSingle(props) {
         clearTimeout(timer)
     }
 
-  }, [open]);
+  }, [open]); // eslint-disable-line
 
-  console.log(props.open);
   return (
     <Dialog
       onClose={() => {

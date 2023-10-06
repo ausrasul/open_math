@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 
 export default function LineChart({ data, title, id }) {
-  const [chart, setChart] = useState(null);
-
+  //const [chart, setChart] = useState(null);
   useEffect(() => {
     const ctx = document.getElementById("chart" + id).getContext("2d");
 
@@ -55,12 +54,12 @@ export default function LineChart({ data, title, id }) {
       },
     });
 
-    setChart(chart);
+    //setChart(chart_);
 
     return () => {
       chart.destroy();
     };
-  }, [data]);
+  }, [data]); // eslint-disable-line
 
   return <canvas id={"chart" + id}></canvas>;
 }

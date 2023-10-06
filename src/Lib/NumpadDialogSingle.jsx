@@ -7,7 +7,6 @@ export default function NumpadDialogSingle(props) {
   const handleChange = (number) => {
     props.onClose?.(number);
   };
-  console.log(props.open)
   return (
     <Dialog
       onClose={() => {

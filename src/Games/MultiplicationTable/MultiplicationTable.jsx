@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
 import Numbers from "../../Lib/numbers";
@@ -36,7 +35,6 @@ export default function SubtractionGrid(props) {
   };
 
   const checkAnswer = (ans) => {
-    console.log(ans, num1, num2);
     props.onAnswer({
       correct: num1 * num2 === ans,
       time: new Date().getTime() - startTime,

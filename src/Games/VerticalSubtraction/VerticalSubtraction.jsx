@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Subtraction from "../../Lib/numbers";
 import Number from "../../Lib/Number";
 import Timer from "../../Lib/Timer";
-import Numpad from "../../Lib/NumpadDialogSingle"
+import Numpad from "../../Lib/NumpadDialogSingle";
 
 const Row = styled("div")`
   display: flex;
@@ -20,7 +20,7 @@ export default function SubtractionGrid(props) {
   const [startTime] = useState(new Date().getTime());
   const [minuend] = useState(minuend_);
   const [subtrahend] = useState(subtrahend_);
-  const [openNumpadFor, setOpenNumpadFor] = useState(null)
+  const [openNumpadFor, setOpenNumpadFor] = useState(null);
 
   const [crossedOff, setCrossedOff] = useState(
     Array.from({ length: props.digits - 1 }, () => false)
@@ -37,7 +37,6 @@ export default function SubtractionGrid(props) {
   );
 
   const crossOff = (minuendIdx) => {
-    console.log(minuendIdx)
     const m = minuend.slice();
     const b = borrows.slice();
     const c = crossedOff.slice();
@@ -75,7 +74,7 @@ export default function SubtractionGrid(props) {
     const a = answer.slice();
     a[idx] = num;
     setAnswer(a);
-    setOpenNumpadFor(null)
+    setOpenNumpadFor(null);
   };
 
   const checkAnswer = () => {
@@ -96,20 +95,20 @@ export default function SubtractionGrid(props) {
           <Number empty />
         </Row>
         <Row>
-        <Number empty />
+          <Number empty />
         </Row>
         <Number
           sx={{ boxShadow: "unset", backgroundColor: "unset" }}
           value="-"
-          />
+        />
       </Box>
       <Box>
         <Timer sx={{ height: 12, mb: 2 }} time={props.maxTimePerQuestion} />
         <Row>
-        <Number empty />
+          <Number empty />
           {borrows.map((borrow, i) => (
             <Number
-              key={"borrows" + i}
+              key={"borrows_" + i}
               tiny
               onClick={() => crossOffBorrow(i)}
               value={borrow > 0 ? borrow : ""}
@@ -129,10 +128,7 @@ export default function SubtractionGrid(props) {
         </Row>
         <Row>
           {subtrahend.map((s, i) => (
-            <Number
-            key={"s" + i}
-            value={s}
-            />
+            <Number key={"s" + i} value={s} />
           ))}
         </Row>
         <Row
@@ -145,14 +141,14 @@ export default function SubtractionGrid(props) {
         ></Row>
         <Row>
           {answer.map((a, i) => (
-            <>
-            <Number
-              key={"answer" + i}
-              value={a}
-              onClick={()=> setOpenNumpadFor(i)}
-            />
-            <Numpad key={"numpad" + i} open={openNumpadFor === i} onClose={onAnswer(i)} />
-            </>
+            <div key={"answer" + i}>
+              <Number value={a} onClick={() => setOpenNumpadFor(i)} />
+              <Numpad
+                key={"numpad" + i}
+                open={openNumpadFor === i}
+                onClose={onAnswer(i)}
+              />
+            </div>
           ))}
         </Row>
         <Row>

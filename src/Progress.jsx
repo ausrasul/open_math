@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import Chart from "./Lib/Chart";
 import storage from "./Lib/storage";
 
@@ -22,7 +22,7 @@ export default function Progress(props) {
         </Box>
      )}
       {Object.keys(games).map((k, i) => (
-        <Paper sx={{p: 2, mb: 2}} >
+        <Paper key={"progress" + i} sx={{p: 2, mb: 2}} >
             <Chart id={i.toString()} data={games[k]} title={k} />
             </Paper>
       ))}
