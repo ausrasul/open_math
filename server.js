@@ -1,7 +1,11 @@
 const express = require("express");
 const path = require("path");
-const app = express();
+const storage = require("./storage")
+const Stats = require("./stats")
 
+const stats = new Stats(storage)
+
+const app = express();
 const port = process.env.PORT || 3001;
 
 app.use("/", express.static(path.join(__dirname, "dist")));
@@ -13,13 +17,27 @@ app.use(express.json());
 
 app.post("/save_stats", function requestHandler(req, res) {
   const data = req.body;
-  let cookie = getcookie(req, 'player_id');
-  if (!cookie) cookie = makeid(10);
-  res.cookie("player_id", cookie, { overwrite: true, maxAge: 12 * 30 * 24 * 60 * 60 * 1000 });
-  console.log(data.stats, cookie)
+  let playerId = getcookie(req, 'player_id');
+  if (!playerId) playerId = makeid(10);
+  res.cookie("player_id", playerId, { overwrite: true, maxAge: 12 * 30 * 24 * 60 * 60 * 1000 });
+  
+  stats.save(playerId, data.gameName, data.gameResult).catch(console.log)
+  console.log(playerId, data)
+
   res.send(JSON.stringify({status: "ok"}));
 });
 
+app.post("/get_all_stats", function requestHandler(req, res) {
+    let playerId = getcookie(req, 'player_id');
+    if (!playerId) playerId = makeid(10);
+    res.cookie("player_id", playerId, { overwrite: true, maxAge: 12 * 30 * 24 * 60 * 60 * 1000 });
+    
+    stats.get(playerId).then(playerStats => {
+        res.send(JSON.stringify({stats: playerStats}))
+    })
+    .catch(console.log)
+  });
+  
 const server = app.listen(port, () =>
   console.log(`Example app listening on port ${port}!`)
 );
