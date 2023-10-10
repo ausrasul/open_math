@@ -5,6 +5,8 @@ import { Calculate as LogoIcon } from "@mui/icons-material";
 
 import SubtractionGame from "./Games/VerticalSubtraction/SubtractionGame";
 import MultiplicationTableGame from "./Games/MultiplicationTable/MultiplicationTableGame";
+import CountingGame from "./Games/Counting"
+
 import Progress from "./Progress";
 
 export default function App(props) {
@@ -30,7 +32,7 @@ export default function App(props) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box>
+      <Box sx={{height: "calc(100vh - 64px)"}}>
         {!game && (
           <Box
             sx={{
@@ -67,6 +69,18 @@ export default function App(props) {
               <Button
                 sx={{ p: 5, mt: 2 }}
                 variant="contained"
+                onClick={() => setGame("counting")}
+              >
+                <div>
+                  <Typography variant="h5">Räkna</Typography>
+                  <Typography variant="caption">
+                    Räkna 1-10
+                  </Typography>
+                </div>
+              </Button>
+              <Button
+                sx={{ p: 5, mt: 2 }}
+                variant="contained"
                 onClick={() => setGame("stats")}
               >
                 <div>
@@ -79,6 +93,7 @@ export default function App(props) {
         )}
         {game === "subtractionSpeedTest" && <SubtractionGame />}
         {game === "multiplicationTableSpeedTest" && <MultiplicationTableGame />}
+        {game === "counting" && <CountingGame />}
         {game === "stats" && <Progress />}
       </Box>
     </Box>
