@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, styled } from "@mui/material";
 
 import Number_ from "./Number";
+import RealKeyboard from "./RealKeyboard";
 
 const Number = styled(Number_)(
   ({ theme }) => `
@@ -15,8 +16,7 @@ const row = {
 
 export default function Numpad(props) {
   const [answer, setAnswer] = useState([]);
-
-  const handleClick = (number) => () => {
+  const handleNumber = number => {
     if (!props.multi) {
       props.onSubmit?.(number);
       return;
@@ -25,6 +25,9 @@ export default function Numpad(props) {
     const a = answer.slice();
     a.push(number);
     setAnswer(a);
+  }
+  const handleClick = (number) => () => {
+    handleNumber(number)
   };
   const handleSubmit = () => {
     props.onSubmit?.(answer);
@@ -62,6 +65,7 @@ export default function Numpad(props) {
             <Number onClick={() => setAnswer([])} value="AC" />
             <Number onClick={handleClick(0)} value="0" />
             <Number onClick={handleSubmit} value="OK" />
+            <RealKeyboard onSubmit={handleSubmit} onNumber={handleNumber}/>
           </>
         )}
         {!props.multi && (
@@ -69,6 +73,7 @@ export default function Numpad(props) {
             <Number empty />
             <Number onClick={handleClick(0)} value="0" />
             <Number empty />
+            <RealKeyboard onSubmit={()=>{}} onNumber={handleNumber}/>
           </>
         )}
       </Box>

@@ -4,7 +4,7 @@ import { Stack, Box, Button, Typography, Toolbar, AppBar } from "@mui/material";
 import { Calculate as LogoIcon } from "@mui/icons-material";
 
 import SubtractionGame from "./Games/VerticalSubtraction/SubtractionGame";
-import MultiplicationTableGame from "./Games/MultiplicationTable/MultiplicationTableGame";
+import MultiplicationTableGame from "./Games/MultiplicationTable";
 import CountingGame from "./Games/Counting"
 
 import Progress from "./Progress";
@@ -66,6 +66,7 @@ export default function App(props) {
                   </Typography>
                 </div>
               </Button>
+              {false && (
               <Button
                 sx={{ p: 5, mt: 2 }}
                 variant="contained"
@@ -78,6 +79,7 @@ export default function App(props) {
                   </Typography>
                 </div>
               </Button>
+              )}
               <Button
                 sx={{ p: 5, mt: 2 }}
                 variant="contained"
