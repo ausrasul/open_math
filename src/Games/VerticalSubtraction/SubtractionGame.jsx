@@ -22,7 +22,7 @@ export default function SubtractionGame(props) {
       totalTime += time;
     });
     const avgTime = Math.floor(totalTime / numOfQuestions);
-    const stats = {
+    const stats_ = {
       avgTime,
       points,
       correctAnswers,
@@ -30,8 +30,8 @@ export default function SubtractionGame(props) {
       rating: (points / numOfQuestions) / maxPoints,
       ts: new Date().getTime()
     }
-    storage.save("Subtraction", stats)
-    setStats(stats);
+    storage.save("Subtraktion", stats_)
+    setStats(stats_);
   };
 
   return (

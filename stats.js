@@ -1,4 +1,4 @@
-module.exports = class Stats {
+export default class Stats {
   constructor(storage) {
     this.storage = storage;
   }
@@ -27,7 +27,7 @@ module.exports = class Stats {
       this.storage
         .read(playerId)
         .then((gamesResults) => {
-          if (gamesResults === null || typeof(gamesResults) === "string") gamesResults = {};
+          if (gamesResults === undefined || gamesResults === null || typeof(gamesResults) === "string") gamesResults = {};
           if (!gamesResults[gameName]) gamesResults[gameName] = [];
           gamesResults[gameName].push(result);
           this.storage.write(playerId, gamesResults);

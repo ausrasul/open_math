@@ -1,7 +1,16 @@
-const express = require("express");
-const path = require("path");
-const storage = require("./storage")
-const Stats = require("./stats")
+//const express = require("express");
+import express from "express"
+//const path = require("path");
+import path from "path"
+import { fileURLToPath } from 'url';
+//const storage = require("./storage")
+//const storage = require("./flatfileStorage.js")
+import storage from "./flatfileStorage.js"
+//const Stats = require("./stats")
+import Stats from "./stats.js"
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const stats = new Stats(storage)
 
@@ -23,7 +32,6 @@ app.post("/save_stats", function requestHandler(req, res) {
   
   stats.save(playerId, data.gameName, data.gameResult).catch(console.log)
   console.log(playerId, data)
-
   res.send(JSON.stringify({status: "ok"}));
 });
 

@@ -36,7 +36,7 @@ export default class Presenter {
           rating: points/this.numOfQuestions / this.maxPoints,
           ts: new Date().getTime()
         }
-        storage.save(stats)
+        storage.save('Multiplikation', stats)
         resolve(stats)
     })
   }

@@ -89,6 +89,7 @@ describe("mulitplicationTable", () => {
       expect(stats).toMatchObject(t.stats);
       expect(storage.save).toHaveBeenCalledTimes(1);
       expect(storage.save).toHaveBeenCalledWith(
+        'Multiplikation',
         expect.objectContaining(t.stats)
       );
     }
