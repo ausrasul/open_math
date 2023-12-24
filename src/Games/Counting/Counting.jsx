@@ -20,19 +20,10 @@ const WideNumber = styled(Number)(
 );
 
 export default function Counting(props) {
-  const [stats, setStats] = useState(null);
-  const [startTime] = useState(new Date().getTime());
-  const [objCnt] = useState(5);
   const [objects, setObjects] = useState([]);
   const ref = useRef();
   const timer = useRef();
 
-  const onAnswer = (num) => {
-    props.onAnswer({
-      correct: num === objCnt,
-      time: new Date().getTime() - startTime,
-    });
-  };
 
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
@@ -48,13 +39,12 @@ export default function Counting(props) {
     });
 
     observer.observe(ref.current);
-
+    const currentRef = ref.current;
     return () => {
       if (timer.current) {
         clearTimeout(timer.current);
       }
-
-      observer.unobserve(ref.current);
+      observer.unobserve(currentRef);
     };
   }, []);
 

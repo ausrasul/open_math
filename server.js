@@ -24,7 +24,7 @@ app.use(express.urlencoded({
   }));
 app.use(express.json());
 
-app.post("/save_stats", function requestHandler(req, res) {
+app.post("/api/save_stats", function requestHandler(req, res) {
   const data = req.body;
   let playerId = getcookie(req, 'player_id');
   if (!playerId) playerId = makeid(10);
@@ -35,13 +35,13 @@ app.post("/save_stats", function requestHandler(req, res) {
   res.send(JSON.stringify({status: "ok"}));
 });
 
-app.post("/get_all_stats", function requestHandler(req, res) {
+app.post("/api/get_all_stats", function requestHandler(req, res) {
     let playerId = getcookie(req, 'player_id');
     if (!playerId) playerId = makeid(10);
-    res.cookie("player_id", playerId, { overwrite: true, maxAge: 12 * 30 * 24 * 60 * 60 * 1000 });
+    res.cookie("player_id", playerId, { overwrite: true, maxAge: 12 * 30 * 24 * 60 * 60 * 1000, sameSite: "strict", httpOnly: true });
     
     stats.get(playerId).then(playerStats => {
-        res.send(JSON.stringify({stats: playerStats}))
+        res.send(JSON.stringify({stats: playerStats || {}}))
     })
     .catch(console.log)
   });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, styled } from "@mui/material";
 
 import Number_ from "./Number";

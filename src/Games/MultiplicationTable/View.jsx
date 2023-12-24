@@ -9,7 +9,7 @@ export default function View(props) {
   const presenter = props.presenter
   useEffect(()=>{
     presenter.loadParams().then(setGameParams)
-  },[])
+  },[]) // eslint-disable-line
 
   const handleAnswers = (answers) => {
     presenter.generateAndSaveStats(answers).then(setStats)

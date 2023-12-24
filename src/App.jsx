@@ -32,7 +32,7 @@ export default function App(props) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{height: "calc(100vh - 64px)"}}>
+      <Box sx={{ height: "calc(100vh - 64px)" }}>
         {!game && (
           <Box
             sx={{
@@ -67,18 +67,18 @@ export default function App(props) {
                 </div>
               </Button>
               {false && (
-              <Button
-                sx={{ p: 5, mt: 2 }}
-                variant="contained"
-                onClick={() => setGame("counting")}
-              >
-                <div>
-                  <Typography variant="h5">Räkna</Typography>
-                  <Typography variant="caption">
-                    Räkna 1-10
-                  </Typography>
-                </div>
-              </Button>
+                <Button
+                  sx={{ p: 5, mt: 2 }}
+                  variant="contained"
+                  onClick={() => setGame("counting")}
+                >
+                  <div>
+                    <Typography variant="h5">Räkna</Typography>
+                    <Typography variant="caption">
+                      Räkna 1-10
+                    </Typography>
+                  </div>
+                </Button>
               )}
               <Button
                 sx={{ p: 5, mt: 2 }}
