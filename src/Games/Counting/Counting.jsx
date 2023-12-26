@@ -23,6 +23,8 @@ export default function Counting(props) {
   const [objects, setObjects] = useState([]);
   const ref = useRef();
   const timer = useRef();
+  const [startTime] = useState(new Date().getTime());
+  const objNumber = useRef(Math.floor(Math.random() * 10) + 1);
 
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Counting(props) {
 
       timer.current = setTimeout(() => {
         const { height, width } = entries[0].contentRect;
-        setObjects(randPlacement(width, height, 10, [100, 100]));
+        setObjects(randPlacement(width, height, objNumber.current, [50, 50]));
         console.log(entries[0].contentRect);
       }, 500);
     });
@@ -48,16 +50,22 @@ export default function Counting(props) {
     };
   }, []);
 
+  const checkAnswer = val => () => {
+    props.onAnswer({
+      correct: val === objNumber.current,
+      time: new Date().getTime() - startTime,
+    });
+  };
   return (
     <Box sx={props.sx}>
-      <Timer sx={{ height: "2%" }} time={10000} />
+      <Timer sx={{ height: "2%" }} time={props.maxTimePerQuestion} />
       <Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column", height: "10%" }}>
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           Hur många?
         </Typography>
       </Box>
       <Box
-        sx={{ width: "500px", m: "auto", height: "70%", position: "relative" }}
+        sx={{ width: "350", m: "auto", height: "70%", position: "relative" }}
         ref={ref}
       >
         {objects.map(([x, y]) => (
@@ -79,10 +87,10 @@ export default function Counting(props) {
           justifyContent: "center",
         }}
       >
-        <WideNumber value={1} />
-        <WideNumber value={1} />
-        <WideNumber value={1} />
-        <WideNumber value={1} />
+        <WideNumber value={1} onClick={checkAnswer(1)}/>
+        <WideNumber value={3} onClick={checkAnswer(3)}/>
+        <WideNumber value={5} onClick={checkAnswer(5)}/>
+        <WideNumber value={7} onClick={checkAnswer(7)}/>
       </Box>
     </Box>
   );

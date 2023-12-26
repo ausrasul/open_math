@@ -9,7 +9,7 @@ export default defineConfig(({ command, mode })  => {
   return {
     plugins: [react(), eslint()],
     server: {
-      port: 3080,
+      port: 3000,
       proxy: {
         "/api": {
           target: env.VITE_SERVER_URL,

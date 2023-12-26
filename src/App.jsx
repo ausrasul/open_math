@@ -45,7 +45,7 @@ export default function App(props) {
             <Typography variant="h5">Matte Time Trial Åk 4-5</Typography>
             <Stack>
               <Button
-                sx={{ p: 5, mt: 10 }}
+                sx={{ p: 2, mt: 5 }}
                 variant="contained"
                 onClick={() => setGame("subtractionSpeedTest")}
               >
@@ -55,7 +55,7 @@ export default function App(props) {
                 </div>
               </Button>
               <Button
-                sx={{ p: 5, mt: 2 }}
+                sx={{ p: 2, mt: 2 }}
                 variant="contained"
                 onClick={() => setGame("multiplicationTableSpeedTest")}
               >
@@ -66,22 +66,20 @@ export default function App(props) {
                   </Typography>
                 </div>
               </Button>
-              {false && (
-                <Button
-                  sx={{ p: 5, mt: 2 }}
-                  variant="contained"
-                  onClick={() => setGame("counting")}
-                >
-                  <div>
-                    <Typography variant="h5">Räkna</Typography>
-                    <Typography variant="caption">
-                      Räkna 1-10
-                    </Typography>
-                  </div>
-                </Button>
-              )}
               <Button
-                sx={{ p: 5, mt: 2 }}
+                sx={{ p: 2, mt: 2 }}
+                variant="contained"
+                onClick={() => setGame("counting")}
+              >
+                <div>
+                  <Typography variant="h5">Räkna</Typography>
+                  <Typography variant="caption">
+                    Räkna 1-10
+                  </Typography>
+                </div>
+              </Button>
+              <Button
+                sx={{ p: 2, mt: 2 }}
                 variant="contained"
                 onClick={() => setGame("stats")}
               >

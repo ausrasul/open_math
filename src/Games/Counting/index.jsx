@@ -1,16 +1,16 @@
 import React, {useState } from "react";
 
-import { Button, Box, Rating } from "@mui/material";
+import { Box } from "@mui/material";
 import CountingRace from "./CountingRace";
 import { calculate_points } from "../../Lib/results";
-import Stats from "../../Lib/Stats";
 import storage from "../../Lib/storage"
+import StatsView from "../../Common/StatsView";
 
 export default function Counting() {
   const [stats, setStats] = useState(null);
   const numOfQuestions = 5;
   const maxPoints = 10;
-  const maxTime = 60000;
+  const maxTime = 10000;
   const handleAnswers = (answers) => {
     let correctAnswers = 0;
     let points = 0;
@@ -31,7 +31,7 @@ export default function Counting() {
       rating: (points / numOfQuestions) / maxPoints,
       ts: new Date().getTime()
     }
-    storage.save("Subtraction", stats)
+    storage.save("Räkna 1-10", stats)
     setStats(stats);
   };
 
@@ -47,25 +47,7 @@ export default function Counting() {
           />
         </Box>
       )}
-      {stats && (
-        <Box
-          sx={{
-            display: "flex",
-            pt: 5,
-            flexDirection: "column",
-          }}
-        >
-          <Stats stats={stats} />
-          <Box sx={{ m: 5, display: "flex", justifyContent: "center" }}>
-            <Rating value={stats.rating * 5} max={5} precision={0.25} readOnly size="large" />
-          </Box>
-          <Box sx={{ m: 5, display: "flex", justifyContent: "center" }}>
-            <Button variant="contained" onClick={() => setStats(null)}>
-              Försök igen
-            </Button>
-          </Box>
-        </Box>
-      )}
+      {stats && <StatsView stats={stats} onClick={() => setStats(null)}/>}
     </Box>
   )
 }

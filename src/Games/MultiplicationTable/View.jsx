@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Box, Rating } from "@mui/material";
+import { Box} from "@mui/material";
 import MultiplicationTableRace from "./MultiplicationTableRace";
-import Stats from "../../Lib/Stats";
+import StatsView from "../../Common/StatsView";
 
 export default function View(props) {
   const [stats, setStats] = useState(null);
@@ -27,25 +27,7 @@ export default function View(props) {
           />
         </Box>
       )}
-      {stats && (
-        <Box
-          sx={{
-            display: "flex",
-            pt: 5,
-            flexDirection: "column",
-          }}
-        >
-          <Stats stats={stats} />
-          <Box sx={{ m: 5, display: "flex", justifyContent: "center" }}>
-            <Rating value={stats.rating * 5} max={5} precision={0.25} readOnly size="large" />
-          </Box>
-          <Box sx={{ m: 5, display: "flex", justifyContent: "center" }}>
-            <Button variant="contained" onClick={() => setStats(null)}>
-              Försök igen
-            </Button>
-          </Box>
-        </Box>
-      )}
+      {stats && <StatsView stats={stats} onClick={() => setStats(null)}/>}
     </div>
   );
 }
