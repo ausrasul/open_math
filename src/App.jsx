@@ -32,7 +32,7 @@ export default function App(props) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ height: "calc(100vh - 64px)" }}>
+      <Box sx={{ height: "calc(100dvh - 64px)" }}>
         {!game && (
           <Box
             sx={{
