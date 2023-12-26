@@ -5,7 +5,7 @@ import { Box, Typography, styled } from "@mui/material";
 import randPlacement from "./randPlacement";
 import Number from "../../Lib/Number";
 import Timer from "../../Lib/Timer";
-
+import numberGenerator from "../../Lib/numberGenerator";
 const ImgStyled = styled("img")`
   height: 100px;
   width: 100px;
@@ -24,7 +24,8 @@ export default function Counting(props) {
   const ref = useRef();
   const timer = useRef();
   const [startTime] = useState(new Date().getTime());
-  const objNumber = useRef(Math.floor(Math.random() * 10) + 1);
+  const randNumbers = useRef(numberGenerator.generateNumbers(4, 1, 10));
+  const objNumber = useRef(randNumbers.current[numberGenerator.generateNumber(0, 3)]);
 
 
   useEffect(() => {
@@ -87,10 +88,9 @@ export default function Counting(props) {
           justifyContent: "center",
         }}
       >
-        <WideNumber value={1} onClick={checkAnswer(1)}/>
-        <WideNumber value={3} onClick={checkAnswer(3)}/>
-        <WideNumber value={5} onClick={checkAnswer(5)}/>
-        <WideNumber value={7} onClick={checkAnswer(7)}/>
+        {randNumbers.current.map((val, i) => (
+          <WideNumber key={"number" + i} value={val} onClick={checkAnswer(val)}/>
+        ))}
       </Box>
     </Box>
   );

@@ -8,7 +8,7 @@ import StatsView from "../../Common/StatsView";
 
 export default function Counting() {
   const [stats, setStats] = useState(null);
-  const numOfQuestions = 5;
+  const numOfQuestions = 10;
   const maxPoints = 10;
   const maxTime = 10000;
   const handleAnswers = (answers) => {
