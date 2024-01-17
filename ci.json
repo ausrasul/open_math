@@ -6,9 +6,6 @@
         "command": "npm install && npm run build && node ./server.js",
         "ports": [
             "8080:3001"
-        ],
-        "links": [
-            "my_redis"
         ]
     },
     "services": [
