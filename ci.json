@@ -1,0 +1,20 @@
+{
+    "name": "open_math",
+    "app": {
+        "name": "open_math_container",
+        "image": "node:18",
+        "command": "npm install && npm run build && node ./server.js",
+        "ports": [
+            "8083:3001"
+        ],
+        "links": [
+            "my_redis"
+        ]
+    },
+    "services": [
+        {
+            "name": "my_redis",
+            "image": "redis"
+        }
+    ]
+}
