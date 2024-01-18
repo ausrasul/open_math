@@ -7,7 +7,7 @@
         "name": "open_math_container",
         "hostname": "open_math",
         "image": "node:18",
-        "command": "node ./server.js",
+        "command": "npm install && npm run build && node ./server.js",
         "env": [
             "NODE_ENV=production"
         ],
