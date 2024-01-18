@@ -1,31 +1,11 @@
 {
-    "volumes":[
-        "redis_volume"
-    ],
     "name": "open_math",
     "app": {
         "name": "open_math_container",
-        "hostname": "open_math",
         "image": "node:18",
         "command": "npm install && npm run build && node ./server.js",
-        "env": [
-            "NODE_ENV=production"
-        ],
         "ports": [
             "8080:3001"
         ]
-    },
-    "services": [
-        {
-            "name": "my_redis",
-            "image": "redis",
-            "hostname": "redis",
-            "volumes": [
-                "redis_volume:/data"
-            ],
-            "env": [
-                "myenv=production"
-            ]
-        }
-    ]
+    }
 }
